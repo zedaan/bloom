@@ -5,6 +5,12 @@ import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import indexRouter from './routes/index'
 import usersRouter from './routes/users'
+import dotenv from 'dotenv'
+
+dotenv.config({
+  debug: true,
+  path: `${__dirname}/../.env.${process.env.NODE_ENV}`
+})
 
 var app = express()
 

@@ -1,11 +1,10 @@
-import { merge } from 'loads'
+import { merge } from 'lodash'
 const env = process.env.NODE_ENV || 'development'
 
 const baseConfig = {
   env,
   isDev: env === 'development',
-  isTest: env === 'test',
-  port: 3000
+  isTest: env === 'test'
 }
 
 let envConfig = {}

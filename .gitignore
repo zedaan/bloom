@@ -62,3 +62,9 @@ typings/
 
 # Materials of the project like mindmaps, wireframes etc
 Materials
+
+# Dist is generated at the build time
+dist
+
+# ENV files with sensitive data
+.env*
