@@ -1,0 +1,5 @@
+{
+  "database": {
+    "url": "MONGODB_URL"
+  }
+}

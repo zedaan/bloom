@@ -1,23 +1,9 @@
-import { merge } from 'lodash'
-const env = process.env.NODE_ENV || 'development'
+import dotenv from 'dotenv'
 
-const baseConfig = {
-  env,
-  isDev: env === 'development',
-  isTest: env === 'test'
-}
+dotenv.config({
+  debug: true,
+  path: `${__dirname}/../../.env.${process.env.NODE_ENV}`
+})
+const config = require('config')
 
-let envConfig = {}
-
-switch (env) {
-  case 'development':
-    envConfig = require('./development').config
-    break
-  case 'test':
-    envConfig = require('./test').config
-    break
-  default:
-    envConfig = require('./development').config
-}
-
-export default merge(baseConfig, envConfig)
+export default config

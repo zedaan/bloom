@@ -1,5 +1,8 @@
 import mongoose from 'mongoose'
+import config from '../config'
 
-export const connect = (url = process.env.MONGODB_URL, opts = {}) => {
+const databaseConfig = config.get('database')
+
+export const connect = (url = databaseConfig.url, opts = {}) => {
   return mongoose.connect(url, { ...opts, useNewUrlParser: true })
 }
