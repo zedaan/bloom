@@ -1,3 +1,12 @@
 {
+  "name": "Bloom",
+  "env": {
+    "MONGODB_URI": {
+      "required": true
+    },
+    "NODE_CONFIG_DIR": {
+      "required": true
+    }
+  },
   "build": "npm run build"
 }

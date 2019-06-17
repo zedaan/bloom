@@ -6,6 +6,7 @@
 import app from './app'
 import http from 'http'
 import debug from 'debug'
+import { connect } from './utils/db'
 debug('bloom:server')
 
 /**
@@ -25,6 +26,14 @@ const server = http.createServer(app)
  * Listen on provided port, on all network interfaces.
  */
 
+;(async () => {
+  try {
+    await connect()
+    console.log('Successfully connected to MongoDB')
+  } catch (error) {
+    console.log(error)
+  }
+})()
 server.listen(port)
 server.on('error', onError)
 server.on('listening', onListening)

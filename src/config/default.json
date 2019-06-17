@@ -1,5 +1,5 @@
 {
   "database": {
-    "url": "MONGODB_URL"
+    "url": "MONGODB_URI"
   }
 }
