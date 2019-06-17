@@ -6,7 +6,10 @@
     },
     "NODE_CONFIG_DIR": {
       "required": true
-    }
+    },
+    "addons": [
+      "mongolab"
+    ]
   },
   "build": "npm run build"
 }
