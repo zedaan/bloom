@@ -1,5 +1,52 @@
 import mongoose from 'mongoose'
 import { nameSchema, phoneNumberSchema } from '../../../utils/common.schema'
+import Joi from '@hapi/joi'
+
+const WEEKDAYS = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday'
+]
+
+export const validate = function validateUser(user) {
+  const schema = Joi.object().keys({
+    gender: Joi.string().valid('male', 'female', 'other'),
+    age: Joi.number()
+      .min(18)
+      .max(200),
+    zipcode: Joi.string()
+      .min(5)
+      .max(6),
+    name: Joi.object().keys({
+      firstName: Joi.string()
+        .min(3)
+        .max(50),
+      lastName: Joi.string()
+        .min(3)
+        .max(50)
+    }),
+    phone: Joi.object().keys({
+      countryCode: Joi.string()
+        .min(1)
+        .max(6),
+      number: Joi.string()
+        .min(10)
+        .max(10)
+    }),
+    hobbies: Joi.array(),
+    activities: Joi.array(),
+    preferredDays: Joi.array().items(Joi.string().valid(WEEKDAYS)),
+    settings: Joi.object().keys({
+      reminders: Joi.string().valid('daily', 'weekly', 'monthly')
+    })
+  })
+  const result = Joi.validate(user, schema)
+  return result
+}
 
 const userSchema = new mongoose.Schema(
   {
@@ -39,15 +86,7 @@ const userSchema = new mongoose.Schema(
       type: [String],
       required: true,
       trim: true,
-      enum: [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday'
-      ]
+      enum: WEEKDAYS
     },
     settings: {
       reminders: {

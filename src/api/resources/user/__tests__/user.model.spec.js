@@ -1,17 +1,17 @@
-import { User } from '../user.model'
-import { Hobby } from '../../hobby/hobby.model';
-import { Activity } from '../../activity/activity.model';
+import { User, validate } from '../user.model'
+import { Hobby } from '../../hobby/hobby.model'
+import { Activity } from '../../activity/activity.model'
 
 describe('User Model', () => {
   test('valid example', async () => {
-    const user = await new User({
+    const userData = {
       name: {
         firstName: 'First',
         lastName: 'Last'
       },
       gender: 'male',
       age: 35,
-      zipcode: 360004,
+      zipcode: '360004',
       phone: {
         countryCode: '+91',
         number: '1231231231'
@@ -36,8 +36,11 @@ describe('User Model', () => {
       settings: {
         reminders: 'daily'
       }
-    }).save()
+    }
+    const { error } = validate(userData)
+    const user = await new User(userData).save()
 
+    expect(error).toBe(null)
     expect(await User.count()).toEqual(1)
     expect(user.id).not.toEqual(null)
   })

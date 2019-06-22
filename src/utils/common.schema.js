@@ -5,7 +5,8 @@ export const nameSchema = {
     type: String,
     required: true,
     trim: true,
-    maxlength: 25
+    minlength: 3,
+    maxlength: 50
   },
   lastName: {
     type: String,
